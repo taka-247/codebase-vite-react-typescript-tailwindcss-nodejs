@@ -1,0 +1,11 @@
+{
+    "name": "react-vite-codebase",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "npm run dev --prefix frontend & npm run dev --prefix backend"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}
