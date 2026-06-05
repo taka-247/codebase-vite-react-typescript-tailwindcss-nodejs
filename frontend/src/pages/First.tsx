@@ -13,6 +13,9 @@ export default function First() {
       return
     }
 
+    console.dir(message)
+    console.dir(errorMessage)
+
     try {
       const { data } = await myAxios.get('/test');
       setMessage(data.message);

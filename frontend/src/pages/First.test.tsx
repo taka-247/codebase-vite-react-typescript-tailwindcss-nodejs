@@ -12,12 +12,12 @@ describe('First', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'API Test' }))
 
-    expect(await screen.findByText(Shared.apiTest)).toBeInTheDocument()
+    expect(await screen.findByText(Shared.api.test.message)).toBeInTheDocument()
   })
 
   it('displays an error when the API call fails', async () => {
     testServer.use(
-      http.get(Shared.apiUrl, () => {
+      http.get(`${Shared.api.local}${Shared.api.test.url}`, () => {
         return new HttpResponse(null, { status: 500 })
       })
     )

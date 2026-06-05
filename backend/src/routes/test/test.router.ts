@@ -4,7 +4,7 @@ import Shared from '@app/shared'
 const router = Router()
 
 router.get('/', (_req, res) => {
-  res.json({ message: Shared.apiTest })
+  res.json({ message: Shared.api.test.message })
 })
 
 export default router
