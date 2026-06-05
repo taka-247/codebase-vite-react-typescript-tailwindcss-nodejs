@@ -17,7 +17,8 @@ export default function First() {
       const { data } = await myAxios.get('/test');
       setMessage(data.message);
     } catch (err) {
-      setErrorMessage(JSON.stringify(err))
+      const errorMessage = err instanceof Error ? err.message : JSON.stringify(err)
+      setErrorMessage(`Error: ${errorMessage}`)
     }
   }
 
