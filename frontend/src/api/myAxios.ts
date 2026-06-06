@@ -1,12 +1,13 @@
-import axios from 'axios';
+import axios from 'axios'
+import type { AxiosInstance } from 'axios'
 
-const myAxios = axios.create({ baseURL: '/api' });
+interface MyAxiosInstance extends AxiosInstance {
+  isAxiosError: typeof axios.isAxiosError
+}
 
-// TODO: Custom interceptors, e.g. attach JWT token so it is used when every request
-// myAxios.interceptors.request.use((config) => {
-//   const token = localStorage.getItem('token');
-//   if (token) config.headers.Authorization = `Bearer ${token}`;
-//   return config;
-// });
+const instance = axios.create({ baseURL: '/' })
+;(instance as MyAxiosInstance).isAxiosError = axios.isAxiosError
 
-export default myAxios;
+const myAxios = instance as MyAxiosInstance
+
+export default myAxios

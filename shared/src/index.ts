@@ -1,11 +1,9 @@
+import api from './api'
+import validation from './validation'
+
 const Shared = {
-  api: {
-    local: 'http://localhost',
-    test: {
-      message: 'Hello from backend!',
-      url: '/api/test',
-    }
-  }
+  api: api,
+  validation: validation
 } as const
 
 export default Shared

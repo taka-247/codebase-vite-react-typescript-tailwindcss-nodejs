@@ -1,10 +1,10 @@
 import { Router } from 'express'
 import Shared from '@app/shared'
 
-const router = Router()
+const testRouter = Router()
 
-router.get('/', (_req, res) => {
+testRouter.get('/test', (_req, res) => {
   res.json({ message: Shared.api.test.message })
 })
 
-export default router
+export default testRouter

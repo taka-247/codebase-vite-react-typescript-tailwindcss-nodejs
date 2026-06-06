@@ -3,12 +3,12 @@ import userEvent from '@testing-library/user-event'
 import { describe, it, expect } from 'vitest'
 import { http, HttpResponse } from 'msw'
 import { testServer } from '../test/server'
-import First from './First'
+import Home from './Home'
 import Shared from '@app/shared'
 
-describe('First', () => {
+describe('Home', () => {
   it('displays the message returned from the API when button is clicked', async () => {
-    render(<First />)
+    render(<Home />)
 
     await userEvent.click(screen.getByRole('button', { name: 'API Test' }))
 
@@ -22,7 +22,7 @@ describe('First', () => {
       })
     )
 
-    render(<First />)
+    render(<Home />)
 
     await userEvent.click(screen.getByRole('button', { name: 'API Test' }))
 
