@@ -5,8 +5,6 @@ type Props = React.ComponentProps<'button'>;
 export default function ThemeModeSwitcher({ ...props }: Props) {
   const [isDark, setIsDark] = useState(false)
 
-  // Note: the following is not recommended as this subscribes to the whole store object. Every time any field changes — even ones you don't use — your component re-renders.
-  // const { theme, toggleTheme } = useThemeStore((state) => state)
   function toggleTheme() {
     const root = document.documentElement
     const isDark = root.getAttribute('data-theme') === 'dark'
