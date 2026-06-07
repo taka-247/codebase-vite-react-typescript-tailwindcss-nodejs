@@ -8,13 +8,13 @@ export default function Header({ ...props }: Props) {
 
   return (
     <header className="bg-secondary px-6 py-4 flex items-center justify-between" {...props}>
-      <div className="text-xl font-bold text-white">React Codebase</div>
+      <div className="text-xl font-bold text-text">React Codebase</div>
       <nav className="flex gap-6">
         {globalLinks.map(link => (
           <Link
             key={link.to}
             to={link.to}
-            className={`text-gray-300 ${pathname === link.to ? 'text-white font-bold' : ''
+            className={`text-text-inactive ${pathname === link.to ? 'text-text font-bold' : ''
               }`}
           >
             {link.label}

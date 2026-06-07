@@ -28,7 +28,7 @@ export default function Home() {
     <>
       <PageTitle>Home</PageTitle>
       <div className="mb-2">
-        <p className="text-white mb-2">{message || errorMessage ? 'You got a message!' : 'Click a button below.'}</p>
+        <p className="text-text mb-2">{message || errorMessage ? 'You got a message!' : 'Click a button below.'}</p>
         {
           (message || errorMessage) && (
             <div className="p-4 bg-white text-primary rounded-sm">

@@ -53,7 +53,7 @@ export default function ContactForm() {
 
       {
         (successMessage || errorMessage) && (
-          <div className={`mb-2 ${errorMessage ? 'text-red-500' : 'text-white'}`}>{successMessage || errorMessage}</div>
+          <div className={`mb-2 ${errorMessage ? 'text-red-500' : 'text-text'}`}>{successMessage || errorMessage}</div>
         )
       }
 

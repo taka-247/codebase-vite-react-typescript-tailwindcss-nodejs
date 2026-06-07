@@ -15,8 +15,10 @@
 - Error Boundary
 - React Hook Form x Zod x Headless UI
     - * Headless UI is for only form elements ATM
-- todo: Redux || Zustand
-- todo: React Query || SWR
+- ThemeModeSwitcher
+- todo: Zustand(Redux)
+    - use Zustand(Redux) for global states, and use Context API for states used per page
+- todo: React Query(SWR, RTK Query)
 - Vitest
 - todo: Playwright
 - todo: Storybook
@@ -125,6 +127,11 @@
 - make `frontend/src/pages/Contact.tsx`
     - use zod on both frontend and backend for formData validation
 
+### Zustand(Redux)
+
+- `npm install zustand`
+- make `frontend/src/store/useThemeStore.ts`
+
 ### Vitest
 
 1. frontend 
@@ -150,9 +157,6 @@
 ### Storybook
 
 ### Chromatic
-
-
-### Redux || Zustand
 
 
 

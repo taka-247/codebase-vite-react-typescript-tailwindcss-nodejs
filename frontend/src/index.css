@@ -8,33 +8,102 @@
   --color-accent: var(--color-accent-val);
   --color-border: var(--color-border-val);
   --color-text: var(--color-text-val);
+  --color-text-inactive: var(--color-text-inactive-val);
+  --color-bg: var(--color-bg-val);
   --color-error: #ef4444;
   --color-shadow: var(--color-shadow-val);
 }
 
 :root {
+  /* Light values */
+  --color-light-primary: #ffffff;
+  --color-light-secondary: #bae6fd;
+  --color-light-third: #7dd3fc;
+  --color-light-fourth: #2dd4bf;
+  --color-light-accent: #aa3bff;
+  --color-light-border: #e5e7eb;
+  --color-light-text: #16171d;
+  --color-light-text-inactive: #505469;
+  --color-light-bg: #16171d;
+  --color-light-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  /* Dark values */
+  --color-dark-primary: #16171d;
+  --color-dark-secondary: #252630;
+  --color-dark-third: #414354;
+  --color-dark-fourth: #5a5d74;
+  --color-dark-accent: #c084fc;
+  --color-dark-border: #2e303a;
+  --color-dark-text: #f3f4f6;
+  --color-dark-text-inactive: #9ca2ad;
+  --color-dark-bg: #f3f4f6;
+  --color-dark-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
   /* Light mode values */
-  --color-primary-val: #ffffff;
-  --color-secondary-val: #bae6fd;
-  --color-third-val: #7dd3fc;
-  --color-fourth-val: #2dd4bf;
-  --color-accent-val: #aa3bff;
-  --color-border-val: #e5e7eb;
-  --color-text-val: #16171d;
-  --color-shadow-val: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --color-primary-val: var(--color-light-primary);
+  --color-secondary-val: var(--color-light-secondary);
+  --color-third-val: var(--color-light-third);
+  --color-fourth-val: var(--color-light-fourth);
+  --color-accent-val: var(--color-light-accent);
+  --color-border-val: var(--color-light-border);
+  --color-text-val: var(--color-light-text);
+  --color-text-inactive-val: var(--color-light-text-inactive);
+  --color-bg-val: var(--color-light-bg);
+  --color-shadow-val: var(--color-light-shadow);
+
+  &[data-theme="dark"] {
+    --color-primary-val: var(--color-dark-primary);
+    --color-secondary-val: var(--color-dark-secondary);
+    --color-third-val: var(--color-dark-third);
+    --color-fourth-val: var(--color-dark-fourth);
+    --color-accent-val: var(--color-dark-accent);
+    --color-border-val: var(--color-dark-border);
+    --color-text-val: var(--color-dark-text);
+    --color-text-inactive-val: var(--color-dark-text-inactive);
+    --color-bg-val: var(--color-dark-bg);
+    --color-shadow-val: var(--color-dark-shadow);
+  }
+
+  &[data-theme="light"] {
+    --color-primary-val: var(--color-light-primary);
+    --color-secondary-val: var(--color-light-secondary);
+    --color-third-val: var(--color-light-third);
+    --color-fourth-val: var(--color-light-fourth);
+    --color-accent-val: var(--color-light-accent);
+    --color-border-val: var(--color-light-border);
+    --color-text-val: var(--color-light-text);
+    --color-text-inactive-val: var(--color-light-text-inactive);
+    --color-bg-val: var(--color-light-bg);
+    --color-shadow-val: var(--color-light-shadow);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     /* Dark mode values */
-    --color-primary-val: #16171d;
-    --color-secondary-val: #252630;
-    --color-third-val: #414354;
-    --color-fourth-val: #5a5d74;
-    --color-accent-val: #c084fc;
-    --color-border-val: #2e303a;
-    --color-text-val: #f3f4f6;
-    --color-shadow-val: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    --color-primary-val: var(--color-dark-primary);
+    --color-secondary-val: var(--color-dark-secondary);
+    --color-third-val: var(--color-dark-third);
+    --color-fourth-val: var(--color-dark-fourth);
+    --color-accent-val: var(--color-dark-accent);
+    --color-border-val: var(--color-dark-border);
+    --color-text-val: var(--color-dark-text);
+    --color-text-inactive-val: var(--color-dark-text-inactive);
+    --color-bg-val: var(--color-dark-bg);
+    --color-shadow-val: var(--color-dark-shadow);
+
+    [data-theme="light"] {
+      --color-primary-val: var(--color-light-primary);
+      --color-secondary-val: var(--color-light-secondary);
+      --color-third-val: var(--color-light-third);
+      --color-fourth-val: var(--color-light-fourth);
+      --color-accent-val: var(--color-light-accent);
+      --color-border-val: var(--color-light-border);
+      --color-text-val: var(--color-light-text);
+      --color-text-inactive-val: var(--color-light-inactive-text);
+      --color-bg-val: var(--color-light-bg);
+      --color-shadow-val: var(--color-light-shadow);
+    }
   }
 }
 
