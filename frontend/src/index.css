@@ -11,6 +11,7 @@
   --color-text-inactive: var(--color-text-inactive-val);
   --color-bg: var(--color-bg-val);
   --color-error: #ef4444;
+  --color-warn: #ffc400;
   --color-shadow: var(--color-shadow-val);
 }
 

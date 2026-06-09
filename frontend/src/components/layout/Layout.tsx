@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import Sidebar from './Sidebar'
+import ToastContainer from '../ui/ToastContainer'
 
 export default function Layout() {
   return (
@@ -12,6 +13,7 @@ export default function Layout() {
         <main className="flex-1 p-4">
           <Outlet />
         </main>
+        <ToastContainer />
       </div>
       <Footer />
     </div>

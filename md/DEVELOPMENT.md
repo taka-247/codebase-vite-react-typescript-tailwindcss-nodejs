@@ -16,7 +16,8 @@
 - React Hook Form x Zod x Headless UI
     - * Headless UI is for only form elements ATM
 - ThemeModeSwitcher
-- todo: Zustand(Redux)
+- Zustand(Redux)
+    - see ToastMessage
     - use Zustand(Redux) for global states, and use Context API for states used per page
 - todo: React Query(SWR, RTK Query)
 - Vitest

@@ -1,6 +1,8 @@
 import { create } from 'zustand'
+import { capitalizeFirstLetter } from '../utils';
+import type { ToastMessageType } from '../components/ui/ToastMessage';
 
-type Toast = { id: number; message: string; type: 'success' | 'error' }
+type Toast = { id: number; message: string; type: ToastMessageType }
 
 type ToastState = {
   toasts: Toast[]
@@ -11,11 +13,10 @@ type ToastState = {
 export const useToastStore = create<ToastState>((set) => ({
   toasts: [],
   addToast: (message, type) =>
-    set((state) => ({ toasts: [...state.toasts, { id: Date.now(), message, type }] })),
+    set((state) => ({ toasts: [...state.toasts, { id: Date.now(), message: `${capitalizeFirstLetter(type)}: ${message}`, type }] })),
   removeToast: (id) =>
     set((state) => ({ toasts: state.toasts.filter((t) => t.id !== id) })),
 }))
-
 
 
 // // Note: the following is not recommended as this subscribes to the whole store object. Every time any field changes — even ones you don't use — your component re-renders.
