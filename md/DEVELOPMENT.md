@@ -156,8 +156,25 @@
 ### Playwright
 
 - `npm init playwright@latest`
-- 
-- 
+    - tests/example.spec.ts
+    - .github/workflows/playwright.yml * optional
+    - playwright.config.ts
+- add scripts `"test:e2e": "playwright test", "test:e2e:ui": "playwright test --ui"` in frontend/package.json
+- edit tests/home.spec.ts
+- run `npm run test:e2e` or `npm run test:e2e:ui` if you want UI
+
+*Claude Code x Playwright MCP = Auto Test*
+https://www.youtube.com/watch?v=TDECUH62yYQ
+
+1. start claude in the repository
+    - `claude`
+2. initialize a new CLAUDE.md file with codebase documentation
+    - `/init`
+3. add playwright mcp
+    - `claude mcp add playwright npx @playwright/mcp@latest`
+4. prompt for testing something
+    - e.g. `use playwright and test on http://localhost:5173/ if a toast message is shown after clicking 'Test API' button`
+5. claude shows test result with snapshot
 
 ### Storybook
 

@@ -19,11 +19,20 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
   // Automatically start the dev server before tests
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
-    // reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: 'npm run dev',
+      url: 'http://localhost:5173',
+      reuseExistingServer: true,
+    },
+    {
+      command: 'npm run dev',
+      cwd: '../backend',
+      url: 'http://localhost:3001/api',
+      reuseExistingServer: true,
+      timeout: 10000,  // fail fast with a clear error instead of hanging
+    },
+  ],
 
 
 
@@ -32,7 +41,7 @@ export default defineConfig({
 
 
 
-  
+
 
   /**
    * Optional
