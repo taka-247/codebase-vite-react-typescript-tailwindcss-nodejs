@@ -19,7 +19,6 @@
 - Zustand(Redux)
     - see ToastMessage
     - use Zustand(Redux) for global states, and use Context API for states used per page
-- todo: React Query(SWR, RTK Query)
 - Vitest
 - todo: Playwright
 - todo: Storybook
@@ -31,6 +30,7 @@
 - Authentication
 - Session Management
     - how long keeps login
+- React Query(SWR, RTK Query)
 - withAuth 
     - High Order Component such as ProtectedDashboardPage
 - RBAC
@@ -154,6 +154,10 @@
 
 
 ### Playwright
+
+- `npm init playwright@latest`
+- 
+- 
 
 ### Storybook
 

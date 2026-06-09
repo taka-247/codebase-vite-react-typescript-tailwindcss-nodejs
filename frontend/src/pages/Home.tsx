@@ -22,7 +22,7 @@ export default function Home() {
       <PageTitle>Home</PageTitle>
       <div className="mb-2">
       </div>
-      <Button onClick={() => handleAPITest()}>Test API</Button>
+      <Button onClick={() => handleAPITest()}>{Shared.pages.home.buttonText}</Button>
     </>
   );
 }
