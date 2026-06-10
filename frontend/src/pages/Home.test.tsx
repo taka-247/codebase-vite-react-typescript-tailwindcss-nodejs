@@ -1,3 +1,4 @@
+// Note: ToastMessage cannot be detected as it is outside of Home while home.spec.ts can - see there
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, it, expect } from 'vitest'
@@ -7,25 +8,28 @@ import Home from './Home'
 import { Shared } from '@app/shared'
 
 describe('Home', () => {
-  it('displays the message returned from the API when button is clicked', async () => {
+  it('Test if successMessage is shown when button is clicked', async () => {
     render(<Home />)
 
-    await userEvent.click(screen.getByRole('button', { name: Shared.api.test.url }))
+    await userEvent.click(screen.getByRole('button', { name: Shared.pages.home.buttonText }))
 
-    expect(await screen.findByText(Shared.api.test.message)).toBeInTheDocument()
+    expect(await screen.findByText(Shared.api.test.successMessage)).toBeInTheDocument()
   })
 
-  it('displays an error when the API call fails', async () => {
+  it('Test if failMessage is shown when button is clicked', async () => {
+    // Overwrite handler
     testServer.use(
-      http.get(`${Shared.api.local}${Shared.api.test.url}`, () => {
+      http.get(Shared.api.test.url, () => {
         return new HttpResponse(null, { status: 500 })
       })
     )
 
     render(<Home />)
 
-    await userEvent.click(screen.getByRole('button', { name: 'API Test' }))
+    await userEvent.click(screen.getByRole('button', { name: Shared.pages.home.buttonText }))
 
-    expect(await screen.findByText(/Error/)).toBeInTheDocument()
+    expect(await screen.findByText(Shared.api.test.failMessage)).toBeInTheDocument()
+
+    testServer.resetHandlers()
   })
 })

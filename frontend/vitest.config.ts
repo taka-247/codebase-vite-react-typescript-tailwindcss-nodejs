@@ -38,6 +38,7 @@ export default mergeConfig(viteConfig, defineConfig({
           }]
         }
       }
-    }]
+    }],
+    exclude: ['tests/**', 'node_modules/**'],
   }
 }));

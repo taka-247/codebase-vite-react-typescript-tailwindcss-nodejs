@@ -51,6 +51,16 @@
 (v3)
 - need GraphQL?
 
+## Test
+
+see if the followings can pass
+- frontend
+    - `npm run test` * vitest
+    - `npm run test:e2e` * playwrite
+    - `npm run storybook` * if api/test work out on storybook browser
+- backend
+    - `npm run test` * vitest
+
 ## Steps for Codebase Setup
 
 ### Frontend

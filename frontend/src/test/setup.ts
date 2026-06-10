@@ -3,7 +3,7 @@ import myAxios from '../api/myAxios'
 import { testServer } from './server'
 
 myAxios.defaults.adapter = 'http'
-myAxios.defaults.baseURL = 'http://localhost/api'
+// no baseURL override — keep the app's default baseURL: '/'
 
 beforeAll(() => testServer.listen())
 afterEach(() => testServer.resetHandlers())
