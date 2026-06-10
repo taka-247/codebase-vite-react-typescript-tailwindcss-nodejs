@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import request from 'supertest'
 import { app } from '../../app'
-import Shared from '@app/shared'
+import { Shared } from '@app/shared'
 
 describe(`GET ${Shared.api.test.url}`, () => {
   it('returns 200 with a message', async () => {

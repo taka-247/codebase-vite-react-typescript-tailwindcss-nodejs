@@ -4,15 +4,15 @@ import { describe, it, expect } from 'vitest'
 import { http, HttpResponse } from 'msw'
 import { testServer } from '../test/server'
 import Home from './Home'
-import Shared from '@app/shared'
+import { Shared } from '@app/shared'
 
 describe('Home', () => {
   it('displays the message returned from the API when button is clicked', async () => {
     render(<Home />)
 
-    await userEvent.click(screen.getByRole('button', { name: 'API Test' }))
+    await userEvent.click(screen.getByRole('button', { name: Shared.api.test.url }))
 
-    expect(await screen.findByText('Hello from backend!')).toBeInTheDocument()
+    expect(await screen.findByText(Shared.api.test.message)).toBeInTheDocument()
   })
 
   it('displays an error when the API call fails', async () => {

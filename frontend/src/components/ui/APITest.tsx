@@ -1,7 +1,7 @@
 import { useToastStore } from "../../store/useToastStore";
 import myAxios from "../../api/myAxios";
 import Button from "../../components/ui/Button";
-import Shared from "@app/shared";
+import { Shared } from "@app/shared";
 
 type Props = React.ComponentProps<'div'>;
 

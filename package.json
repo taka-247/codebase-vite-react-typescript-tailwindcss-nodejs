@@ -3,9 +3,16 @@
     "private": true,
     "version": "0.0.0",
     "type": "module",
-    "workspaces": ["frontend", "backend", "shared"],
+    "workspaces": [
+        "frontend",
+        "backend",
+        "shared"
+    ],
     "scripts": {
-        "dev": "npm run dev --prefix frontend & npm run dev --prefix backend"
+        "share": "npm run build --workspace=shared",
+        "dev": "npm run build --workspace=shared && concurrently \"npm run dev --workspace=frontend\" \"npm run dev --workspace=backend\""
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "concurrently": "^10.0.3"
+    }
 }

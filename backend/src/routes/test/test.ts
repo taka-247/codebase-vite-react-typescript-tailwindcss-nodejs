@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import Shared from '@app/shared'
+import { Shared } from '@app/shared'
 
 const testRouter = Router()
 

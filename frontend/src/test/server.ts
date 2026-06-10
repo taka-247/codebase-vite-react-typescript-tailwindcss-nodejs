@@ -1,4 +1,4 @@
 import { setupServer } from 'msw/node'
-import { handlers } from './mocks/handler'
+import { Shared } from '@app/shared'
 
-export const testServer = setupServer(...handlers)
+export const testServer = setupServer(...Shared.api.handlers)

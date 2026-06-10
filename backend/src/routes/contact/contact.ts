@@ -1,4 +1,4 @@
-import Shared from '@app/shared'
+import { Shared } from '@app/shared'
 import { Router } from 'express'
 
 const contactRouter = Router()

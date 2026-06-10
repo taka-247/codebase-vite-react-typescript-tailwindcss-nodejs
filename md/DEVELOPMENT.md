@@ -8,7 +8,7 @@
 - TypeScript
 - Tailwind CSS
 - Colour Theme
-- Workspaces
+- Workspaces (Shared)
 - MyAxios
 - React Router Dom
     - Layout
@@ -92,15 +92,16 @@
     - `@media (prefers-color-scheme: dark) { :root { --color-primary-val: #16171d; } }`
 - then use `bg-primary`, `text-primary`, etc
 
-### Workspaces
+### Workspaces (Shared)
 
 * so that frontend and backend can use same sources
 
 - `"workspaces": ["frontend", "backend", "shared"]` in root package.json
-- make `shared/package.json`
-- make `shared/src/index.ts`
+- make files udner `shared/`
 - run `npm install @app/shared --workspace=frontend @app/shared --workspace=backend`
-- `import Shared from '@app/shared'` in frontend/backend file
+- `import { Shared } from '@app/shared'` in frontend/backend file
+- run `npm run build --workspace=shared` when some of Shared files updated
+    - it builds `shared/dist/index.js` which is used in React app
 
 ### React Router Dom
 

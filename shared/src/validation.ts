@@ -6,8 +6,6 @@ const contactSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters'),
 })
 
-const validation = {
+export const validation = {
     contactSchema: contactSchema,
 } as const
-
-export default validation

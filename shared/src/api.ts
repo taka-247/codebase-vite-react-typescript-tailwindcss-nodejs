@@ -1,13 +1,20 @@
-const api = {
-    local: 'http://localhost',
-    test: {
-      message: 'Hello from backend!',
-      url: '/api/test',
-    },
-    contact: {
-      successMessage: 'Message received successfully!',
-      url: '/api/contact',
-    },
-  } as const
+import { http, HttpResponse } from 'msw'
 
-export default api
+const testMessage = 'Hello from backend!!!!!!!'
+
+export const api = {
+  local: 'http://localhost',
+  test: {
+    message: testMessage,
+    url: '/api/test',
+  },
+  contact: {
+    successMessage: 'Message received successfully!',
+    url: '/api/contact',
+  },
+  handlers: [
+    http.get('/api/test', () => {
+      return HttpResponse.json({ message: testMessage })
+    }),
+  ]
+} as const

@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import myAxios from '../api/myAxios'
 import Field from '../components/ui/Field'
 import Button from '../components/ui/Button'
-import Shared from '@app/shared'
+import { Shared } from '@app/shared'
 
 type FormData = z.infer<typeof Shared.validation.contactSchema>
 

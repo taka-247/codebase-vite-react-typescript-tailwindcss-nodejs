@@ -1,13 +1,11 @@
-import api from './api'
-import validation from './validation'
-import home from './pages/home'
+import { api } from './api.js'
+import { validation } from './validation.js'
+import { home } from './pages/home.js'
 
-const Shared = {
+export const Shared = {
   api: api,
   validation: validation,
   pages: {
     home: home,
   }
 } as const
-
-export default Shared
