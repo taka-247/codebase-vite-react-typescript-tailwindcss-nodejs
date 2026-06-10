@@ -152,6 +152,7 @@
     - add test scripts in package.json
     - write test code for a component, such as `pages/First_test.tsx`
 
+*MSW* - Mock API
 
 ### Playwright
 
@@ -177,6 +178,20 @@ https://www.youtube.com/watch?v=TDECUH62yYQ
 5. claude shows test result with snapshot
 
 ### Storybook
+
+- `npx storybook@latest init`
+- delete `frontend/src/story/**`
+- add `/// <reference types="vite/client" />` and `import '../src/index.css'` in `frontend/.storybook/preview.tsx`
+- make `frontend/src/components/ui/Button.stories.tsx`
+- run `npm run storybook` 
+    * storybook is auto-generated in package.json script
+- can see Storybook on `http://localhost:6006/`
+
+- setup MSW
+    - `npm i msw-storybook-addon -D`
+    - genrate msw service worker in public
+        - `npx msw init public/` -> `frontend/public/mockServiceWorker.js`
+    - add msw configuration with `msw-storybook-addon` in `frontend/.storybook/preview.tsx`
 
 ### Chromatic
 

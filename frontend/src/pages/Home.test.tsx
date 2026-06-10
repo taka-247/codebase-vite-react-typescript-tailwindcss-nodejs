@@ -12,7 +12,7 @@ describe('Home', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'API Test' }))
 
-    expect(await screen.findByText(Shared.api.test.message)).toBeInTheDocument()
+    expect(await screen.findByText('Hello from backend!')).toBeInTheDocument()
   })
 
   it('displays an error when the API call fails', async () => {
