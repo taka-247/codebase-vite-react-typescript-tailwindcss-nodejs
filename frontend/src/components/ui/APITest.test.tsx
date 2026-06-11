@@ -3,13 +3,13 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, it, expect } from 'vitest'
 import { http, HttpResponse } from 'msw'
-import { testServer } from '../test/server'
-import Home from './Home'
+import { testServer } from '../../test/server'
 import { Shared } from '@app/shared'
+import APITest from './APITest'
 
-describe('Home', () => {
+describe('APITest', () => {
   it('Test if successMessage is shown when button is clicked', async () => {
-    render(<Home />)
+    render(<APITest />)
 
     await userEvent.click(screen.getByRole('button', { name: Shared.pages.home.buttonText }))
 
@@ -24,7 +24,7 @@ describe('Home', () => {
       })
     )
 
-    render(<Home />)
+    render(<APITest />)
 
     await userEvent.click(screen.getByRole('button', { name: Shared.pages.home.buttonText }))
 

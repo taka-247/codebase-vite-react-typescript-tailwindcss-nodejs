@@ -190,6 +190,8 @@ https://www.youtube.com/watch?v=TDECUH62yYQ
 
 ### Storybook
 
+1.  basic settings
+
 - `npx storybook@latest init`
 - delete `frontend/src/story/**`
 - add `/// <reference types="vite/client" />` and `import '../src/index.css'` in `frontend/.storybook/preview.tsx`
@@ -198,11 +200,17 @@ https://www.youtube.com/watch?v=TDECUH62yYQ
     * storybook is auto-generated in package.json script
 - can see Storybook on `http://localhost:6006/`
 
-- setup MSW
-    - `npm i msw-storybook-addon -D`
-    - genrate msw service worker in public
-        - `npx msw init public/` -> `frontend/public/mockServiceWorker.js`
-    - add msw configuration with `msw-storybook-addon` in `frontend/.storybook/preview.tsx`
+2. setup MSW
+
+- `npm i msw-storybook-addon -D`
+- genrate msw service worker in public
+    - `npx msw init public/` -> `frontend/public/mockServiceWorker.js`
+- add msw configuration with `msw-storybook-addon` in `frontend/.storybook/preview.tsx`
+
+3. TODO: Storybook x Vitest
+
+- install React Testing Library
+    - `npm install --save-dev @testing-library/react @testing-library/dom`
 
 ### Chromatic
 
