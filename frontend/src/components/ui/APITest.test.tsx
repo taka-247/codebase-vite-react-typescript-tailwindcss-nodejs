@@ -1,35 +1,37 @@
-// Note: ToastMessage cannot be detected as it is outside of Home while home.spec.ts can - see there
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { describe, it, expect } from 'vitest'
+// Note: **.test.ts run pararelly, while test functions run sequently 
+// Note: cannot use test.concurrent when using screen of testing-library-react
+import { describe, test, expect } from 'vitest'
 import { http, HttpResponse } from 'msw'
 import { testServer } from '../../test/server'
 import { Shared } from '@app/shared'
+import { render, screen } from '@testing-library/react' // waitFor
+import userEvent from '@testing-library/user-event'
 import APITest from './APITest'
 
 describe('APITest', () => {
-  it('Test if successMessage is shown when button is clicked', async () => {
+  test('shows success message', async () => {
     render(<APITest />)
-
     await userEvent.click(screen.getByRole('button', { name: Shared.pages.home.buttonText }))
 
-    expect(await screen.findByText(Shared.api.test.successMessage)).toBeInTheDocument()
+    const text = await screen.findByText(Shared.api.test.successMessage)
+    expect(text).toBeInTheDocument()
+
+    // // In the case to wait some milliseconds
+    // await waitFor(async () => {
+    //   const text = await screen.findByText(Shared.api.test.successMessage)
+    //   expect(text).toBeInTheDocument()
+    // }, {
+    //   timeout: 500,
+    // })
   })
 
-  it('Test if failMessage is shown when button is clicked', async () => {
-    // Overwrite handler
+  test('shows error message', async () => {
     testServer.use(
-      http.get(Shared.api.test.url, () => {
-        return new HttpResponse(null, { status: 500 })
-      })
+      http.get(Shared.api.test.url, () => new HttpResponse(null, { status: 500 }))
     )
 
     render(<APITest />)
-
     await userEvent.click(screen.getByRole('button', { name: Shared.pages.home.buttonText }))
-
     expect(await screen.findByText(Shared.api.test.failMessage)).toBeInTheDocument()
-
-    testServer.resetHandlers()
   })
 })
