@@ -146,6 +146,8 @@ see if the followings can pass
 
 ### Vitest
 
+*We'll use storybook-driven vitest test after so following settings are temporal*
+
 1. frontend 
     - `npm install -D vitest @vitest/ui jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event msw@latest`
     - update vite.config.ts for vitest
@@ -213,8 +215,40 @@ https://www.youtube.com/watch?v=TDECUH62yYQ
     - e.g. `const APITest = composeStory(Stories.Default, Meta)`
 - run `npm run test` and check if vitest works out
 
+*Now we can do storybook-driven vitest test*
+so files/conf related to original vitest
+    - delete `**.test.ts`
+    - delete `frontend/tests/**`
+    - delete conf in `frontend/vitest.config.ts`
+
+*How storybook-driven-vitest-test works out by 'npm run test'*
+1. vitest reads vitest.config.ts
+2. the storybook project (name: 'storybook') runs
+3. `storybookTest` plugin transforms stories into tests
+4. open browser via Playwright
+    - The storybook project has browser: { provider: playwright(), instances: [{ browser: 'chromium' }] }. So Vitest launches headless chromium and mounts each story in a real browser page (not jsdom). The http://localhost:63315 you see is Vitest's browser-mode server serving the test/component bundle
+5. setProjectAnnotations
+    - The addon automatically injects your preview.tsx annotations — parameters, decorators, and crucially loaders: [mswLoader] — into every story test. (This is what your deleted vitest.setup.ts used to do manually; now it's automatic.)
+6. MSW browser service worker intercepts requests
+7. play function executes as the test body
+8. test results shows up
+
 ### Chromatic
 
+* Chromatic has already implemented by Storybook settings
 
+- create chromatic project
+    - go to chromatic.com 
+    - sign in with Github account
+    - make a chromatic project there based on your project
+    - command shows up for us, e.g. `npx chromatic --project-token=chpt_8b3e82024d5be85`
+- build
+    - `npm run build-storybook`
+    - `npx chromatic --project-token=chpt_xxxxxxxxxxxx`
+    - see your project on chromatic.com 
+        - `https://www.chromatic.com/setup?appId=6a2a348411367bfb65c4b539`
+    - you can see screenshots and diffs
 
 ### CI/CD
+
+- TODO: wire Chromatic into CI

@@ -25,10 +25,3 @@ const preview: Preview = {
 };
 
 export default preview;
-
-export const decorators = [
-  (Story: any) => {
-    document.documentElement.classList.toggle('dark', /* condition */)
-    return <Story />
-  },
-]
