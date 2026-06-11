@@ -207,10 +207,11 @@ https://www.youtube.com/watch?v=TDECUH62yYQ
     - `npx msw init public/` -> `frontend/public/mockServiceWorker.js`
 - add msw configuration with `msw-storybook-addon` in `frontend/.storybook/preview.tsx`
 
-3. TODO: Storybook x Vitest
+3. Storybook x Vitest
 
-- install React Testing Library
-    - `npm install --save-dev @testing-library/react @testing-library/dom`
+- use Component which is being registered in Storybook in **.test.ts
+    - e.g. `const APITest = composeStory(Stories.Default, Meta)`
+- run `npm run test` and check if vitest works out
 
 ### Chromatic
 

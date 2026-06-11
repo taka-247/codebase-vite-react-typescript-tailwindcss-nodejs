@@ -6,7 +6,10 @@ import { testServer } from '../../test/server'
 import { Shared } from '@app/shared'
 import { render, screen } from '@testing-library/react' // waitFor
 import userEvent from '@testing-library/user-event'
-import APITest from './APITest'
+import { composeStory } from '@storybook/react-vite'
+import Meta, * as Stories from './APITest.stories'
+
+const APITest = composeStory(Stories.Default, Meta)
 
 describe('APITest', () => {
   test('shows success message', async () => {
