@@ -23,7 +23,8 @@
 - Playwright
 - Storybook
 - Chromatic
-- todo: CI/CD
+- CI/CD
+- todo: Husky
 
 (v2)
 - Login Page
@@ -246,7 +247,7 @@ so files/conf related to original vitest
     - `npm run build-storybook`
     - `npx chromatic --project-token=chpt_xxxxxxxxxxxx`
     - see your project on chromatic.com 
-        - `https://www.chromatic.com/setup?appId=xxxxxxxxxxx`
+        - `https://www.chromatic.com/setup?appId=6a2a348411367bfb65c4b539`
     - you can see screenshots and diffs
 
 ### CI/CD
@@ -263,3 +264,11 @@ so files/conf related to original vitest
         - make frontend/.env and write `CHROMATIC_PROJECT_TOKEN: chpt_`. the `npx chromatic` command auto-read the token
     - add Chromatic token as secret value
         - Repo -> Settings -> Secrets and variables -> Actions -> Repository secrets -> CHROMATIC_PROJECT_TOKEN: chpt_...
+
+### Husky
+
+* need to run 'npm run share' so that every developers in this project can use latest shared values
+
+- `npm install -D husky --workspace-root`
+- `npx husky init `
+- make `.husky/post-merge`
