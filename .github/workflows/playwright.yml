@@ -2,7 +2,7 @@
 # timing: on push to main
 # features: Playwright Tests
 # 
-name: Playwright Tests
+name: Playwright
 on:
   push:
     branches: [ main ]
