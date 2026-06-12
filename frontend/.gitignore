@@ -9,3 +9,6 @@ node_modules/
 # Storybook
 *storybook.log
 storybook-static
+
+# Env
+.env

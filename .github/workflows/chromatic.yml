@@ -1,0 +1,29 @@
+# 
+# timing: on push to main
+# features: run chromatic to see diffs on chromatic.com
+# 
+name: Chromatic
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+jobs:
+  chromatic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # required: Chromatic needs full history for baselines
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      # install packages based on package-lock.json
+      - run: npm ci
+      # shared must be built before build-storybook
+      - run: npm run share
+      # build storybook and run chromatic
+      - run: cd frontend && npm run storybook-chromatic
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

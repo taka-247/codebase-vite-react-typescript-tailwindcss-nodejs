@@ -20,9 +20,9 @@
     - see ToastMessage
     - use Zustand(Redux) for global states, and use Context API for states used per page
 - Vitest
-- todo: Playwright
-- todo: Storybook
-- todo: Chromatic
+- Playwright
+- Storybook
+- Chromatic
 - todo: CI/CD
 
 (v2)
@@ -241,14 +241,25 @@ so files/conf related to original vitest
     - go to chromatic.com 
     - sign in with Github account
     - make a chromatic project there based on your project
-    - command shows up for us, e.g. `npx chromatic --project-token=chpt_8b3e82024d5be85`
+    - command shows up for us, e.g. `npx chromatic --project-token=chpt_xxxxxxxxxxxx`
 - build
     - `npm run build-storybook`
     - `npx chromatic --project-token=chpt_xxxxxxxxxxxx`
     - see your project on chromatic.com 
-        - `https://www.chromatic.com/setup?appId=6a2a348411367bfb65c4b539`
+        - `https://www.chromatic.com/setup?appId=xxxxxxxxxxx`
     - you can see screenshots and diffs
 
 ### CI/CD
 
-- TODO: wire Chromatic into CI
+- add in vite.config.ts so that Github Pages serves under this repo
+    - `base: process.env.GITHUB_PAGES ? '/codebase-vite-react-typescript-tailwindcss-nodejs/' : '/',`
+- Github Pages settings
+    - enable GitHub Pages
+        - Repo -> Settings -> Pages -> Build and deployment -> Source -> select "GitHub Actions"
+- make `.github/cl.yml`
+- make `.github/deploy.yml`
+- make `.github/chromatic.yml`
+    - add `"storybook-chromatic": "storybook build && npx chromatic --storybook-build-dir=storybook-static"` in `frontend/package.json` script so it can be called by `.github/chromatic.yml`
+        - make frontend/.env and write `CHROMATIC_PROJECT_TOKEN: chpt_`. the `npx chromatic` command auto-read the token
+    - add Chromatic token as secret value
+        - Repo -> Settings -> Secrets and variables -> Actions -> Repository secrets -> CHROMATIC_PROJECT_TOKEN: chpt_...

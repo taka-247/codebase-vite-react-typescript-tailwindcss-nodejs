@@ -1,0 +1,23 @@
+# 
+# timing: on push to main
+# features: build + publish to Pages
+# TODO: now only frontend is deployed to Github Pages. Sort out backend in some way
+# 
+name: Deploy
+on:
+  push: { branches: [main] }
+permissions: { pages: write, id-token: write }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: npm }
+      - run: npm ci
+      - run: npm run share
+      - run: GITHUB_PAGES=true npm run build --workspace=frontend
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: frontend/dist }
+      - uses: actions/deploy-pages@v4
