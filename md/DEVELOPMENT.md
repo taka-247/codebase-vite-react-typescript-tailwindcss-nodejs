@@ -41,7 +41,12 @@
 - Node.js (Express)
 - TypeScript
 - Vitest
-- Zod (formData validation)
+- Zod
+    - formData validation
+- Redis 
+    - Caching
+    - Session Storage 
+    - Rate Limiting
 
 (v2)
 - Prasma, Drizzle / Monastery
