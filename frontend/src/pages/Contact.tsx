@@ -6,12 +6,12 @@ import myAxios from '../api/myAxios'
 import Field from '../components/ui/Field'
 import Button from '../components/ui/Button'
 import { Shared } from '@app/shared'
+import { useToastStore } from '../store/useToastStore'
 
 type FormData = z.infer<typeof Shared.validation.contactSchema>
 
 export default function ContactForm() {
-  const [successMessage, setSuccessMessage] = useState<string | undefined>()
-  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const addToast = useToastStore((state) => state.addToast);
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<FormData>({
     resolver: zodResolver(Shared.validation.contactSchema),
   })
@@ -19,15 +19,13 @@ export default function ContactForm() {
   async function onSubmit(data: FormData) {
     try {
       const { data: responseData } = await myAxios.post(Shared.api.contact.url, data)
-      setSuccessMessage(responseData.message)  // 'Message received successfully'
-      setErrorMessage(undefined)
+      addToast(responseData.message, 'success')
       reset()
     } catch (err) {
-      setSuccessMessage(undefined)
       if (myAxios.isAxiosError(err) && err.response?.status === 400) {
-        setErrorMessage(err.response.data.errorMessage)
+        addToast(err.response.data.errorMessage, 'error')
       } else {
-        setErrorMessage(err instanceof Error ? err.message : JSON.stringify(err))
+        addToast(err instanceof Error ? err.message : JSON.stringify(err), 'error')
       }
     }
   }
@@ -51,17 +49,10 @@ export default function ContactForm() {
 
       </form>
 
-      {
-        (successMessage || errorMessage) && (
-          <div className={`mb-2 ${errorMessage ? 'text-red-500' : 'text-text'}`}>{successMessage || errorMessage}</div>
-        )
-      }
-
       <Button
         type="submit"
         form="contact-form"
         disabled={isSubmitting}>{isSubmitting ? 'Sending...' : 'Send'}</Button>
-
     </div>
   )
 }
