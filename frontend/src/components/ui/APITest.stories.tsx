@@ -14,7 +14,7 @@ export const Success: StoryObj<typeof APITest> = {
   // Test: show successMessage after clicking button and api successed
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByRole('button', { name: Shared.pages.home.buttonText }))
+    await userEvent.click(canvas.getByRole('button', { name: Shared.pages.dashboard.buttonText }))
     await expect(await canvas.findByText(Shared.api.test.successMessage)).toBeInTheDocument()
   },
 }
@@ -30,7 +30,7 @@ export const Error: StoryObj<typeof APITest> = {
   // Test: show failMessage after clicking button and api failed
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByRole('button', { name: Shared.pages.home.buttonText }))
+    await userEvent.click(canvas.getByRole('button', { name: Shared.pages.dashboard.buttonText }))
     await expect(await canvas.findByText(Shared.api.test.failMessage)).toBeInTheDocument()
   },
 }

@@ -1,3 +1,3 @@
-export const home = {
+export const dashboard = {
     buttonText: 'Test API!!!!'
   } as const

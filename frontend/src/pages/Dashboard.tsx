@@ -1,10 +1,10 @@
 import APITest from "../components/ui/APITest";
 import PageTitle from "../components/ui/PageTitle";
 
-export default function Home() {
+export default function Dashboard() {
   return (
     <>
-      <PageTitle>Home</PageTitle>
+      <PageTitle>Dashboard</PageTitle>
       <div className="mb-2">
       </div>
       <APITest />

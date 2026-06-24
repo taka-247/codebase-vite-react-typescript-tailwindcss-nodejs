@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import Layout2 from './components/layout/Layout2'
-import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
 import Contact from './pages/Contact'
 import Profile from './pages/Profile'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import ErrorBoundary from './components/ErrorBoundary'
 
 export const globalLinks = [
-  { to: '/', label: 'Home', Component: <Home /> },
+  { to: '/', label: 'Dashboard', Component: <Dashboard /> },
   { to: '/contact', label: 'Contact', Component: <Contact /> },
   { to: '/profile', label: 'Profile', Component: <Profile /> },
 ]
