@@ -4,7 +4,7 @@ import Footer from './Footer'
 import Sidebar from './Sidebar'
 import ToastContainer from '../ui/ToastContainer'
 
-export default function Layout() {
+export default function LayoutApp() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

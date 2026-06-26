@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import Sidebar from './Sidebar'
 
-export default function Layout2() {
+export default function LayoutStatic() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

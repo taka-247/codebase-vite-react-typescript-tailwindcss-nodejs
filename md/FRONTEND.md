@@ -1,6 +1,4 @@
-# Code Base
-
-## Frontend
+# Frontend
 
 1. `npm create vite@latest frontend -- --template react-ts`
 2. `cd frontend && npm i`
@@ -21,16 +19,6 @@
         - add `@import "tailwindcss";` to src/index.css
     - add `server.proxy` in frontend/vite.config.ts
 
-## Backend
-
-1. `cd ../ && mkdir backend && cd backend`
-2. `npm init -y && npm i express && npm i -D typescript @types/node @types/express ts-node-dev`
-3. `npx tsc --init`
-4. Configure backend files
-    - `src/index.ts`
-    - `tsconfig.json`
-    - package.json.scripts
-
 ## Colour Theme
 
 - add the followings in index.css * @theme inline can consider light/dark mode
@@ -39,7 +27,7 @@
     - `@media (prefers-color-scheme: dark) { :root { --color-primary-val: #16171d; } }`
 - then use `bg-primary`, `text-primary`, etc
 
-### Workspaces (Shared)
+## Workspaces (Shared)
 
 * so that frontend and backend can use same sources
 
@@ -50,7 +38,7 @@
 - run `npm run build --workspace=shared` when some of Shared files updated
     - it builds `shared/dist/index.js` which is used in React app
 
-### React Router Dom
+## React Router Dom
 
 - `npm install react-router-dom`
 - add `BrowserRouter` in `frontend/src/main.tsx`
@@ -62,12 +50,12 @@
         - use `import { Outlet } from 'react-router-dom'`
     - use Layout in `frontend/src/App.tsx`
 
-### Error Boundary
+## Error Boundary
 
 - make `frontend/src/components/ErrorBoundary.tsx`
 - wrap components with ErrorBoundary in `frontend/src/App.tsx`
 
-### React Hook Form x Zod x Headless UI
+## React Hook Form x Zod x Headless UI
 
 - React Hook Form x Zod
     - `npm install react-hook-form zod @hookform/resolvers`
@@ -76,12 +64,12 @@
 - make `frontend/src/pages/Contact.tsx`
     - use zod on both frontend and backend for formData validation
 
-### Zustand(Redux)
+## Zustand(Redux)
 
 - `npm install zustand`
 - make `frontend/src/store/useThemeStore.ts`
 
-### Vitest
+## Vitest
 
 *We'll use storybook-driven vitest test after so following settings are temporal*
 
@@ -104,7 +92,7 @@
 
 *MSW* - Mock API
 
-### Playwright
+## Playwright
 
 - `npm init playwright@latest`
     - tests/example.spec.ts
@@ -127,7 +115,7 @@ https://www.youtube.com/watch?v=TDECUH62yYQ
     - e.g. `use playwright and test on http://localhost:5173/ if a toast message is shown after clicking 'Test API' button`
 5. claude shows test result with snapshot
 
-### Storybook
+## Storybook
 
 1.  basic settings
 
@@ -170,7 +158,7 @@ so files/conf related to original vitest
 7. play function executes as the test body
 8. test results shows up
 
-### Chromatic
+## Chromatic
 
 * Chromatic has already implemented by Storybook settings
 
@@ -186,7 +174,7 @@ so files/conf related to original vitest
         - `https://www.chromatic.com/setup?appId=6a2a348411367bfb65c4b539`
     - you can see screenshots and diffs
 
-### CI/CD
+## CI/CD
 
 - add in vite.config.ts so that Github Pages serves under this repo
     - `base: process.env.GITHUB_PAGES ? '/codebase-vite-react-typescript-tailwindcss-nodejs/' : '/',`
@@ -201,10 +189,44 @@ so files/conf related to original vitest
     - add Chromatic token as secret value
         - Repo -> Settings -> Secrets and variables -> Actions -> Repository secrets -> CHROMATIC_PROJECT_TOKEN: chpt_...
 
-### Husky
+## Husky
 
 * need to run 'npm run share' so that every developers in this project can use latest shared values
 
 - `npm install -D husky --workspace-root`
 - `npx husky init `
 - make `.husky/post-merge`
+
+## Authentication
+
+- Pages
+    - Signup.tsx
+    - Login.tsx
+    - ResetPassword.tsx
+        - Supabase sends a link navigating to update-password page
+    - UpdatePassword.tsx
+        - the email link has special session only used for updateing password and init > onAuthStateChange can detect it
+- useAuthStore.ts 
+    - auth logics with Supabase SDK
+- Higher order components
+    - AuthRoute.tsx
+    - ProtectedRoute
+
+### Password Reset Flow
+
+1. send an email which has a link having some params, such as token
+2. a user can navigate to update-password page via the link
+3. in the page, supabase client detects the token and creates PASSWORD_RECOVERY session
+4. init > onAuthStateChange detects the session
+5. updatePassword works out (because now it is under session)
+
+### Session Management
+
+TODO: how long keeps login
+
+## React Query ~~(SWR)~~
+
+
+## RBAC
+
+

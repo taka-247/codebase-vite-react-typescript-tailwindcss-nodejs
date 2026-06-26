@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { globalLinks } from '../../App'
+import { appPages } from '../../App'
 
 type Props = React.ComponentProps<'header'>
 
@@ -10,7 +10,7 @@ export default function Header({ ...props }: Props) {
     <header className="bg-secondary px-6 py-4 flex items-center justify-between" {...props}>
       <div className="text-xl font-bold text-text">React Codebase</div>
       <nav className="flex gap-6">
-        {globalLinks.map(link => (
+        {appPages.map(link => (
           <Link
             key={link.to}
             to={link.to}

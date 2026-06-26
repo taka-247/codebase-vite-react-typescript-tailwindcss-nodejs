@@ -82,8 +82,8 @@ npm run test:run     # vitest single run
 
 ### Frontend routing & layouts (`src/App.tsx`)
 Routes are two arrays:
-- `globalLinks` → rendered in `Layout` (Header + Sidebar + Footer)
-- `staticLinks` → rendered in `Layout2` (minimal layout, e.g. Privacy Policy)
+- `appPages` → rendered in `Layout` (Header + Sidebar + Footer)
+- `staticPages` → rendered in `Layout2` (minimal layout, e.g. Privacy Policy)
 
 ### Theming
 `data-theme="dark|light"` on `<html>`; CSS custom properties in `src/index.css` map light/dark values to Tailwind utilities (`bg-primary`, `text-text`, …). `ThemeModeSwitcher` toggles it.

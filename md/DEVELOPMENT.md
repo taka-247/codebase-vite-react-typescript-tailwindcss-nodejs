@@ -4,6 +4,8 @@
 
 ### Frontend
 
+See [FRONTEND.md](./FRONTEND.md)
+
 - React
 - TypeScript
 - Tailwind CSS
@@ -29,14 +31,17 @@
 (v2)
 - Login Page
 - Authentication
+- HOC for Auth 
+    - PublicRoute
+    - ProtectedRoute
 - Session Management
     - how long keeps login
 - React Query(SWR, RTK Query)
-- withAuth 
-    - High Order Component such as ProtectedDashboardPage
 - RBAC
 
 ### Backend
+
+See [BACKEND.md](./BACKEND.md)
 
 - Node.js (Express)
 - TypeScript
