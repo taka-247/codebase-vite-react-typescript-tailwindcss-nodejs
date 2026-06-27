@@ -20,7 +20,7 @@ export default function Signup() {
 
   async function onSubmit(data: FormData) {
     try {
-      await signUp(data.email, data.password)
+      await signUp(data.email, data.password, data.userName)
       addToast('Account created. Check your email to confirm.', 'success')
       navigate('/login', { replace: true })
     } catch (err) {
@@ -32,6 +32,10 @@ export default function Signup() {
     <>
       <h1 className="text-2xl font-bold mb-6">Sign up</h1>
       <form id="signup-form" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 mb-4">
+
+        <Field label="User name" error={errors.userName?.message}>
+          <input type="text" autoComplete="name" {...register('userName')} />
+        </Field>
 
         <Field label="Email" error={errors.email?.message}>
           <input type="email" autoComplete="email" {...register('email')} />

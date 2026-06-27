@@ -11,6 +11,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ResetPassword from './pages/ResetPassword'
 import UpdatePassword from './pages/UpdatePassword'
+import NotFound from './pages/NotFound'
 import ErrorBoundary from './components/ErrorBoundary'
 import ProtectedRoute from './components/hoc/ProtectedRoute'
 import AuthRoute from './components/hoc/AuthRoute'
@@ -25,9 +26,9 @@ export const auth2Pages = [
   { to: '/update-password', label: 'Update Password', Component: <UpdatePassword /> },
 ]
 export const appPages = [
-  { to: '/', label: 'Dashboard', Component: <Dashboard /> },
-  { to: '/contact', label: 'Contact', Component: <Contact /> },
-  { to: '/profile', label: 'Profile', Component: <Profile /> },
+  { to: '/', label: 'Dashboard', Component: <Dashboard />, isSidebar: true },
+  { to: '/contact', label: 'Contact', Component: <Contact />, isSidebar: true },
+  { to: '/profile', label: 'Profile', Component: <Profile />, isSidebar: true },
 ]
 export const staticPages = [
   { to: '/privacy-policy', label: 'PrivacyPolicy', Component: <PrivacyPolicy /> },
@@ -73,6 +74,9 @@ export default function App() {
             <Route key={page.to} path={page.to} element={page.Component} />
           ))}
         </Route>
+
+        {/* No pages */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </ErrorBoundary>
   )

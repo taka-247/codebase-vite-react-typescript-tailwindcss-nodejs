@@ -50,6 +50,24 @@
         - use `import { Outlet } from 'react-router-dom'`
     - use Layout in `frontend/src/App.tsx`
 
+```tsx
+<Routes>
+  <Route element={<AuthRoute />}>    // pathless guard, Outlet inside
+    <Route element={<LayoutAuth />}> // pathless layout, Outlet inside
+      <Route path="/login" element={<Login />} />   // page
+    </Route>
+  </Route>
+</Routes>
+```
+
+### NotFound
+
+```tsx
+<Routes>
+  <Route path="*" element={<NotFound />} />
+</Routes>
+```
+
 ## Error Boundary
 
 - make `frontend/src/components/ErrorBoundary.tsx`
@@ -212,6 +230,20 @@ so files/conf related to original vitest
     - AuthRoute.tsx
     - ProtectedRoute
 
+### Architecture on User Auth and Profile
+
+1. create user auth by supabase.auth.signUp() in frontend
+    - a user confirms via an email sent by Supabase
+2. make supabase/migrations/create_profiles.sql
+    - SQL creates profile table triggered by the confirmation (by 1)
+    - RLS (Row Level Security)
+        - a Postgres feature controling which rows a given user can read or write. Without RLS, anyone could query whole table from the browser. With RLS, the database checks a policy for every row before returning/modifying it
+3. apply supabase/migrations/** by Supabase MCP or a npm script prepared in package.json
+4. a profile table will be created when a new auth is created
+
+**Memo**
+I thought both auth and profile creation at the same time on backend would be better as no need to have supabase/migrations/**, but admin.createUser (this is the only feature for auth creation on backend) won't send an confirm email and still requires RLS customisation. These gives us additional efforts. Hence, I ended up deciding I go with the architecture above
+
 ### Password Reset Flow
 
 1. send an email which has a link having some params, such as token
@@ -222,7 +254,39 @@ so files/conf related to original vitest
 
 ### Session Management
 
-TODO: how long keeps login
+the followings can be controled by Supabase dashboard
+
+- Access Token
+    - 1 hour by default
+- Max session length
+    - the real "you must log in again after X" control
+    - 0 by default, i.e. Access Token is updated by onAuthStateChange and refresh token when the access token expires
+- Inactivity timeout 
+    - logs out idle users
+    - null by default
+
+## Change Email Sender
+
+Supabase auth emails, e.g. reset password, are sent by Supabase by default.
+In production, we need to change it to our own custom SMTP
+
+1. make a domain on Mailgun
+2. set Mailgun DNS records in Cloudflare
+3. verify 2 on Mailgun
+4. get SMTP credentials from Mailgun after the verification
+5. set it in Supabase SMTP Settings -> enable custom SMTP
+6. all auth emails are now based on your custom SMTP
+
+- SMTP
+    - protocol to send emails
+- SMTP server
+    - machine that actually sends your emails
+    - e.g. Mailgun
+    - can create a domain which produce DNS records
+- Authorizer
+    - third party authorises the SMTP domain by the DNS records
+    - if no authorizer, a malicious and untrusted SMTP server sends an email
+    - e.g. Cloudflare
 
 ## React Query ~~(SWR)~~
 

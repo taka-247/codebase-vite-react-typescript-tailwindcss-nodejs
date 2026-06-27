@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -12,8 +12,12 @@ type FormData = z.infer<typeof Shared.validation.loginSchema>
 
 export default function Login() {
   const navigate = useNavigate()
+  const location = useLocation()
   const signIn = useAuthStore((state) => state.signIn)
   const addToast = useToastStore((state) => state.addToast)
+
+  // Where the user was headed before being redirected to login (defaults to dashboard)
+  const from = (location.state as { from?: { pathname: string } } | null)?.from?.pathname ?? '/'
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } =
     useForm<FormData>({ resolver: zodResolver(Shared.validation.loginSchema) })
@@ -21,7 +25,7 @@ export default function Login() {
   async function onSubmit(data: FormData) {
     try {
       await signIn(data.email, data.password)
-      navigate('/', { replace: true })
+      navigate(from, { replace: true })
     } catch (err) {
       addToast(err instanceof Error ? err.message : 'Login failed', 'error')
     }

@@ -32,7 +32,7 @@ See [FRONTEND.md](./FRONTEND.md)
 - Login Page
 - Authentication
 - HOC for Auth 
-    - PublicRoute
+    - AuthRoute
     - ProtectedRoute
 - Session Management
     - how long keeps login

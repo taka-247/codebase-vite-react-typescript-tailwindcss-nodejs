@@ -7,7 +7,7 @@ type AuthState = {
   loading: boolean
   init: () => () => void
   signIn: (email: string, password: string) => Promise<void>
-  signUp: (email: string, password: string) => Promise<void>
+  signUp: (email: string, password: string, displayName: string) => Promise<void>
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<void>
   updatePassword: (password: string) => Promise<void>
@@ -38,8 +38,13 @@ export const useAuthStore = create<AuthState>((set) => ({
     if (error) throw error
   },
 
-  signUp: async (email, password) => {
-    const { error } = await supabase.auth.signUp({ email, password })
+  signUp: async (email, password, displayName) => {
+    // display_name is the key Supabase Auth reads for the dashboard "Display name"
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { display_name: displayName } },
+    })
     if (error) throw error
   },
 
