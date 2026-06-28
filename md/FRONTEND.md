@@ -232,13 +232,18 @@ so files/conf related to original vitest
 
 ### Architecture on User Auth and Profile
 
+1. a user signs up 
+2. confirm email is sent to him/her
+3. he/she clicks a link in the email
+4. user authentication is created by the confirmation
+5. PostgresSQL creates a row in Profiles table triggered by the auth creation
+6. fetch a profile based on logged in user auth
+
+#### Setting Steps
+
 1. create user auth by supabase.auth.signUp() in frontend
     - a user confirms via an email sent by Supabase
-2. make supabase/migrations/create_profiles.sql
-    - SQL creates profile table triggered by the confirmation (by 1)
-    - RLS (Row Level Security)
-        - a Postgres feature controling which rows a given user can read or write. Without RLS, anyone could query whole table from the browser. With RLS, the database checks a policy for every row before returning/modifying it
-3. apply supabase/migrations/** by Supabase MCP or a npm script prepared in package.json
+2. refer to **Supabase x PostgreSQL > Schema Control** in [BACKEND.md](./BACKEND.md)
 4. a profile table will be created when a new auth is created
 
 **Memo**
@@ -288,7 +293,15 @@ In production, we need to change it to our own custom SMTP
     - if no authorizer, a malicious and untrusted SMTP server sends an email
     - e.g. Cloudflare
 
+## API Endpoints
+
+- get api/users/
+    - to get all users profile
+- get api/user/
+    - to get a user profile
+
 ## React Query ~~(SWR)~~
+
 
 
 ## RBAC
