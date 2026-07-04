@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import type { Session } from '@supabase/supabase-js'
 import { supabase } from '../lib/supabase'
+import { queryClient } from '../lib/queryClient'
 
 type AuthState = {
   session: Session | null
@@ -51,6 +52,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   signOut: async () => {
     const { error } = await supabase.auth.signOut()
     if (error) throw error
+    queryClient.clear() // drop all cached server data (profile, etc.) on logout
   },
 
   // Send a password-reset email; the link returns the user to /update-password

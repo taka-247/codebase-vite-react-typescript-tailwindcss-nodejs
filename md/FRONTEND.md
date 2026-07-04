@@ -302,7 +302,29 @@ In production, we need to change it to our own custom SMTP
 
 ## React Query ~~(SWR)~~
 
-
+- `frontend/lib/queryClient.ts`
+- `frontend/src/main.tsx`
+    - QueryClientProvider wrapper with queryClient prop
+- `frontend/src/hooks/useProfile.ts` - server state management
+    - staleTime
+        - when to refetch
+        - `staleTime: Infinity` if the data rarely change. Default staleTime is 0 refetching on every page visit
+    - enabled
+        - works out only when true
+        - `enabled: !!session` - only when there is a session, i.e. a user logged in
+    - gcTime (garbage collection)
+        - when to delete from memory
+        - when gcTime should be long?
+            - if a query is costly to fetch (large dataset, slow API)
+            - if users navigate away and back frequently
+            - same idea with staleTime
+        - short gcTime 
+            - if sensitive or memory-heavy data
+            - e.g. a banking app — after the user closes the "account details" view, you don't want their balance/transactions lingering in the JS heap
+- `frontend/src/store/useAuthStore.ts`
+    - signOut calls queryClient.clear()
+- `pages/Dashboard.tsx`
+    - call useProfile()
 
 ## RBAC
 
