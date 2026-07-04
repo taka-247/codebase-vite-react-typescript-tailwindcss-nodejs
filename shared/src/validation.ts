@@ -27,6 +27,14 @@ const updatePasswordSchema = z.object({
   path: ['confirmPassword'],
 })
 
+const profileSchema = z.object({
+  display_name: z.string().min(1, 'Display name is required'),
+  email: z.string().min(1, 'Email is required').email('Invalid email address'),
+  // read-only fields — present so the form type matches, not user-validated
+  role: z.string(),
+  created_at: z.string(),
+})
+
 const contactSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   email: z.string().min(1, 'Email is required').email('Invalid email address'),
@@ -38,5 +46,6 @@ export const validation = {
   loginSchema: loginSchema,
   resetPasswordSchema: resetPasswordSchema,
   updatePasswordSchema: updatePasswordSchema,
+  profileSchema: profileSchema,
   contactSchema: contactSchema,
 } as const

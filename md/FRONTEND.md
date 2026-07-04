@@ -270,29 +270,6 @@ the followings can be controled by Supabase dashboard
     - logs out idle users
     - null by default
 
-## Change Email Sender
-
-Supabase auth emails, e.g. reset password, are sent by Supabase by default.
-In production, we need to change it to our own custom SMTP
-
-1. make a domain on Mailgun
-2. set Mailgun DNS records in Cloudflare
-3. verify 2 on Mailgun
-4. get SMTP credentials from Mailgun after the verification
-5. set it in Supabase SMTP Settings -> enable custom SMTP
-6. all auth emails are now based on your custom SMTP
-
-- SMTP
-    - protocol to send emails
-- SMTP server
-    - machine that actually sends your emails
-    - e.g. Mailgun
-    - can create a domain which produce DNS records
-- Authorizer
-    - third party authorises the SMTP domain by the DNS records
-    - if no authorizer, a malicious and untrusted SMTP server sends an email
-    - e.g. Cloudflare
-
 ## API Endpoints
 
 - get api/users/

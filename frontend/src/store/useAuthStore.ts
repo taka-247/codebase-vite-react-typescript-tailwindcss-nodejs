@@ -12,9 +12,11 @@ type AuthState = {
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<void>
   updatePassword: (password: string) => Promise<void>
+  updateEmail: (email: string) => Promise<void>
+  refreshSession: () => Promise<void>
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   session: null,
   loading: true,
 
@@ -22,6 +24,9 @@ export const useAuthStore = create<AuthState>((set) => ({
   init: () => {
     supabase.auth.getSession().then(({ data }) => {
       set({ session: data.session, loading: false })
+      // Refresh once on load so the token reflects any server-side change
+      // confirmed elsewhere (e.g. an email change confirmed via its email link).
+      if (data.session) get().refreshSession()
     })
 
     // Call whenever auth changes on login, logout, token refresh, etc
@@ -30,8 +35,16 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({ session, loading: false })
     })
 
-    // Returns an unsubscribe function for cleanup
-    return () => subscription.unsubscribe()
+    // When the user returns to the tab (e.g. after clicking a confirmation link
+    // in another tab), refresh so a newly-confirmed email is reflected.
+    const onFocus = () => get().refreshSession()
+    window.addEventListener('focus', onFocus)
+
+    // Returns a cleanup function
+    return () => {
+      subscription.unsubscribe()
+      window.removeEventListener('focus', onFocus)
+    }
   },
 
   signIn: async (email, password) => {
@@ -69,5 +82,22 @@ export const useAuthStore = create<AuthState>((set) => ({
   updatePassword: async (password) => {
     const { error } = await supabase.auth.updateUser({ password })
     if (error) throw error
+  },
+
+  // Change the auth email. Supabase sends a confirmation link before it takes
+  // effect, so session.user.email stays the OLD value until the user confirms.
+  // Refresh the session so the store reflects the latest email whenever it does change.
+  updateEmail: async (email) => {
+    const { error } = await supabase.auth.updateUser({ email })
+    if (error) throw error
+    const { data } = await supabase.auth.getSession()
+    set({ session: data.session })
+  },
+
+  // Mint a fresh access token so its claims (e.g. email) reflect the latest
+  // server-side user record. Silently ignores the "no session" case.
+  refreshSession: async () => {
+    const { data } = await supabase.auth.refreshSession()
+    if (data.session) set({ session: data.session })
   },
 }))
