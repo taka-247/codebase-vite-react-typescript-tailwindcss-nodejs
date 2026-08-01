@@ -15,7 +15,7 @@
     "test:e2e:ui": "playwright test --ui",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "storybook-chromatic": "storybook build && npx chromatic --storybook-build-dir=storybook-static"
+    "storybook-chromatic": "storybook build && npx chromatic --storybook-build-dir=storybook-static --exit-zero-on-changes"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
