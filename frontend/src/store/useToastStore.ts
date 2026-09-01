@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { capitalizeFirstLetter } from '../utils';
+import { capitalizeFirstLetter } from '../util';
 import type { ToastMessageType } from '../components/ui/ToastMessage';
 
 type Toast = { id: number; message: string; type: ToastMessageType }
